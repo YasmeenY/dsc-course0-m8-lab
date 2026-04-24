@@ -12,11 +12,11 @@ I focused on two main measures:
 - `Fatal.Serious.Fraction`: the share of passengers who were fatally or seriously injured.
 - `Destroyed`: whether the aircraft was totally destroyed.
 
-To avoid making recommendations from very small samples, I used minimum observation cutoffs:
+To avoid making recommendations from very small samples, I used minimum observation cutoffs in the grouped analysis:
 
-- Makes: at least `20` accidents in the filtered data.
-- Small-aircraft models: at least `20` accidents.
-- Large-aircraft models: at least `15` accidents, since there were fewer large-aircraft models with enough cases.
+- Make and model comparisons in the notebook use at least `10` accidents per subgroup.
+- Weather and phase-of-flight comparisons use at least `50` accidents per subgroup.
+- The cleaning notebook also removes makes that are too sparse overall before the analysis notebook is run.
 
 ## Recommendation Summary
 
@@ -49,31 +49,31 @@ At the make level, `EMBRAER` and `MCDONNELL DOUGLAS` had the best overall result
 
 ### Small-aircraft model recommendations
 
-These were the best-supported small-aircraft make/model combinations:
+These were the best-supported small-aircraft make/model combinations in the executed notebook:
 
 | Make / model | Sample size | Mean fatal/serious injury fraction | Destroyed fraction |
 | --- | ---: | ---: | ---: |
+| CESSNA 172SP | 12 | 0.000 | 0.000 |
+| MAULE M 5 210C | 11 | 0.000 | 0.000 |
 | PIPER PA 18A 150 | 20 | 0.025 | 0.000 |
+| BEECH A23 24 | 10 | 0.025 | 0.000 |
 | CESSNA 180J | 27 | 0.037 | 0.000 |
-| CESSNA 180H | 34 | 0.049 | 0.000 |
-| CESSNA 195 | 37 | 0.050 | 0.000 |
-| PIPER PA 20 | 34 | 0.059 | 0.000 |
 
-For small airplanes, `PIPER PA 18A 150` and the `CESSNA 180` family stand out the most in this dataset.
+For small airplanes, `CESSNA 172SP`, `MAULE M 5 210C`, and `PIPER PA 18A 150` are at the top of the current model-level ranking. I would still read those results with some caution because the first two models only clear the minimum sample threshold by a small margin.
 
 ### Large-aircraft model recommendations
 
-Large-aircraft model recommendations were more limited by sample size, but these models performed best among groups with at least 15 accidents:
+Large-aircraft model recommendations were more limited by sample size, but these models performed best among groups with at least 10 accidents:
 
 | Make / model | Sample size | Mean fatal/serious injury fraction | Destroyed fraction |
 | --- | ---: | ---: | ---: |
 | BOEING 777 | 19 | 0.002 | 0.053 |
 | BOEING 757 | 16 | 0.002 | 0.000 |
+| EMBRAER EMB 145LR | 13 | 0.050 | 0.000 |
 | BOEING 737 7H4 | 21 | 0.057 | 0.000 |
 | BOEING 767 | 26 | 0.150 | 0.115 |
-| BOEING 737 | 118 | 0.156 | 0.119 |
 
-For large airplanes, `BOEING 777` and `BOEING 757` had the strongest observed results. The `BOEING 737` family did not rank as highly on averages, but it appears much more often in the data than any other large-aircraft model.
+For large airplanes, `BOEING 777` and `BOEING 757` had the strongest observed results. `EMBRAER EMB 145LR` and `BOEING 737 7H4` also performed well, although they are based on smaller samples than the broader `BOEING 737` family.
 
 ## Factors Affecting Injury and Damage Outcomes
 
@@ -115,14 +115,6 @@ Phase of flight also mattered:
 [Open make recommendations image](images/make_recommendations.png)
 
 This figure compares the top make-level recommendations for small and large airplanes.
-
-### Model recommendations
-
-![Model recommendations](images/model_recommendations.png)
-
-[Open model recommendations image](images/model_recommendations.png)
-
-This figure shows the strongest make/model candidates after applying the sample-size filters.
 
 ### Weather and phase-of-flight risk factors
 
